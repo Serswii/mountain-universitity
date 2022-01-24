@@ -21,12 +21,12 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('login', EmailType::class, [
-                'label' => 'Пожалуйста введите текст',
+                'label' => 'Пожалуйста введите email',
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
                     'autofocus' => 'autofocus',
-                    'placeholder' => 'Здесь должен быть ваш логин'
+                    'placeholder' => 'Здесь должен быть ваш email'
                 ],
                 'label_attr' => [
                     'class' => 'pb-2'

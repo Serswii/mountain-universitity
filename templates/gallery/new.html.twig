@@ -1,0 +1,13 @@
+{% extends 'main/default.html.twig' %}
+{% block title %}Создание фото{% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+    <h1 class="pb-4">Создание фотографий в галерее</h1>
+
+    {{ include('gallery/_form.html.twig') }}
+        <button class="btn"><a href="{{ path('gallery_index') }}">Вернуться</a></button>
+    </div>
+</section>
+{% endblock %}

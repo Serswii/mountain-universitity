@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_label(form.name_photo) }}
+    {{ form_widget(form.name_photo) }}
+    <button class="button is-info is-hovered">{{ button_label|default('Сохранить') }}</button>
+{{ form_end(form) }}

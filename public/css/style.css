@@ -1,3 +1,31 @@
-.form-footer{
-    display: flex;
+.navbar, .navbar-menu {
+    background-color: #1c1c1c;
+}
+.navbar-burger {
+    margin-top: 8px;
+}
+.logo {
+    color: white;
+    font-size: 2.5rem;
+}
+h1 {
+    font-size: 2.5rem;
+}
+.menu-header-link {
+    color: white;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.navbar-menu {
+    display: none;
+}
+
+
+
+@media screen and (max-width: 1024px ) {
+    .full-menu {
+        display: none;
+    }
 }

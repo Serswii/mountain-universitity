@@ -4,6 +4,8 @@
 namespace App\Service;
 
 
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -27,7 +29,7 @@ class FileManagerService implements FileManagerServiceInterface
 
     public function imagePostUpload(UploadedFile $file): string
     {
-        $fileName = uniqid('', true).'.'.$file->guessExtension();
+        $fileName = md5(uniqid('', true)).'.'.$file->guessExtension();
         try {
             $file->move($this->getPostImageDirectory(), $fileName);
         }
@@ -39,6 +41,12 @@ class FileManagerService implements FileManagerServiceInterface
 
     public function removePostImage(string $fileName)
     {
-        // TODO: Implement removePostImage() method.
+        $fileSystem = new Filesystem();
+        $fileImage = $this->getPostImageDirectory().''.$fileName;
+        try {
+            $fileSystem->remove($fileImage);
+        } catch (IOExceptionInterface $exception){
+            echo $exception->getMessage();
+        }
     }
 }

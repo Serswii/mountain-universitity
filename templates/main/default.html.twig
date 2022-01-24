@@ -1,32 +1,98 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Главная{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="public/css/style.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Главная{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ asset('css/lightgallery-bundle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lg-zoom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lg-thumbnail.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script defer src="{{ asset('js/solid.min.js') }}"></script>
+    <script defer src="{{ asset('js/fontawesome.min.js') }}"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 
-    </head>
-    <body>
-        {% block body %}
-            <div class="page-content pt-4 pb-4">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>Главная</h1>
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <button class="btn"><a href="{{ path('app_logout') }}">Выйти</a></button>
-                            {% else %}
-                                <button class="btn"><a href="{{ path('app_login') }}">Войти</a></button>
-                                <button class="btn"><a href="{{ path('app_register') }}">Регистрация</a></button>
-                            {% endif %}
-                        </div>
+</head>
+<body>
+<header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="col-lg-12 is-flex is-align-items-center is-justify-content-space-between">
+                <div class="navbar-brand">
+                    <div class="navbar-start logo">GalleryHouse</div>
+                </div>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div class="navbar-end full-menu">
+                        <button class="btn"><a class="menu-header-link" href="{{ path('gallery_index') }}">Создание галереи</a></button>
+                        <button class="btn"><a class="menu-header-link" href="{{ path('app_logout') }}">Выйти</a></button>
+                    </div>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+
+            </div>
+            <div class="navbar-menu" id="navMenu">
+                <div class="navbar-end columns is-flex-direction-column">
+                    <button class="btn"><a class="menu-header-link" href="{{ path('gallery_index') }}">Создание галереи</a></button>
+                    <button class="btn"><a class="menu-header-link" href="{{ path('app_logout') }}">Выйти</a></button>
+                </div>
+            </div>
+                {% else %}
+                    <div class="navbar-end full-menu">
+                        <button class="btn"><a class="menu-header-link" href="{{ path('app_login') }}">Войти</a></button>
+                        <button class="btn"><a class="menu-header-link" href="{{ path('app_register') }}">Регистрация</a></button>
+                    </div>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+        </div>
+            <div class="navbar-menu" id="navMenu">
+                    <div class="navbar-end columns is-flex-direction-column">
+                        <button class="btn"><a class="menu-header-link" href="{{ path('app_login') }}">Войти</a></button>
+                        <button class="btn"><a class="menu-header-link" href="{{ path('app_register') }}">Регистрация</a></button>
+                    </div>
+            </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>
+{% block body %}
+    <div class="page-content pt-4 pb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="animated-thumbnails-gallery" class="columns is-justify-content-center is-flex is-flex-wrap-wrap">
+                        {% for gallery in galleries %}
+                                <a class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd block" data-src="{{ asset('uploads/post/') }}{{ gallery.namePhoto }}" data-sizes="(min-width: 40em) 80vw, 100vw"><img class="image" style="height: 215px; width: 25em" src="{{ asset('uploads/post/') }}{{ gallery.namePhoto }}" alt="" /></a>
+                        {% else %}
+                            <h1>Извините, пока галерея пуста</h1>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        {% endblock %}
-    </body>
+        </div>
+    </div>
+{% endblock %}
+</body>
+{% block footer %}
+    <footer>
+        <script src="{{ asset('js/lightgallery.min.js') }}"></script>
+        <script src="{{ asset('js/lg-thumbnail.umd.js') }}"></script>
+        <script src="{{ asset('js/lg-zoom.umd.js') }}"></script>
+        <script src="{{ asset('js/navbar.js') }}"></script>
+    </footer>
+{% endblock %}
 </html>

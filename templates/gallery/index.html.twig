@@ -1,0 +1,41 @@
+{% extends 'main/default.html.twig' %}
+{% block title %}Галерея{% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <h1>Галерея</h1>
+        <table class="table is-striped is-bordered is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Имя фотографии</th>
+                    <th>Id пользователя</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for gallery in galleries %}
+                <tr>
+                    <td>{{ gallery.id }}</td>
+                    <td>{{ gallery.namePhoto }}</td>
+                    <td>{{ gallery.idUser }}</td>
+                    <td>
+                        <a href="{{ path('gallery_show', {'id': gallery.id}) }}">Просмотр</a>
+                        <a href="{{ path('gallery_edit', {'id': gallery.id}) }}">Редактирование</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Записей не найдено</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="is-flex">
+            <button class="btn"><a href="{{ path('gallery_new') }}">Создать</a></button>
+            <button class="btn"><a href="{{ path('index') }}">Вернуться</a></button>
+        </div>
+    </div>
+</section>
+{% endblock %}
